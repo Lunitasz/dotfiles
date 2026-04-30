@@ -1,0 +1,134 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator-abrir terminal
+super + Return
+	kitty
+
+# program launcher
+super + d
+	rofi -show run
+
+# web broser-abrir firefox
+super + b
+	firefox
+
+# sxhkd reload - recagar sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+#
+# bspwm hotkeys
+#
+
+# quit/restart bspwm - matar o restar bspwm 
+super + shift + r
+	bspc {quit,wm -r}
+
+# close and kill - cerrar ventana 
+super + x
+	bspc node -{c,k}
+
+
+# alternate between the tiled and monocle layout - foco total pantalla completa
+super + m
+	bspc desktop -l next
+
+
+#
+# windows states
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the windows vim key 
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# swap window
+super + shift + {h,j,k,l}
+	bspc node -f {west,south,norht,east}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history - volver a la ultima ventana usada
+super + tab
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus the node in the given direction
+super + {_, shift + } {Left,Down,Up,Right}
+    bspc node {-f,s} {west,south,north,east}
+
+#
+# workspaces 
+#
+# focus or send to the given desktop - lleva el escritorio a otro lado
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# focus the next/previous windows in the current desktop - movete entre escritorios
+super + ctrl + {Left,Right}
+	bspc desktop -f {prev,next}.local
+
+
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio 
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space 
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+ #custom script resize windows - cambiar de tamaño la ventana               
+super + alt + {Left,Down,Up,Right}
+	/home/luna/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
+
+
+# move a floating window
+super + shift + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+  # Fijar lo que acabo de copiar (Ctrl + Alt + F)
+ctrl + alt + f
+    ~/.config/eww/scripts/clipboard.sh --pin
+
+# Borrar todas las notas fijas (Ctrl + Alt + W)
+ctrl + alt + w
+    ~/.config/eww/scripts/clipboard.sh --wipe-fijos

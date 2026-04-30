@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+file="$HOME/.config/polybar/scripts/target"
+
+# Si el archivo no existe o está vacío (size 0), no imprimas nada y sal
+if [[ ! -s "$file" ]]; then
+    echo ""
+    exit 0
+fi
+
+ip_address=$(awk '{print $1}' "$file" 2>/dev/null)
+machine_name=$(awk '{print $2}' "$file" 2>/dev/null)
+
+if [[ -n "$ip_address" ]]; then
+    # Usamos los colores de la polybar para que el icono sea dinámico
+    echo "%{F#e51d0b} %{F#ffffff}$ip_address%{F#7f849c} - $machine_name"
+else
+    echo ""
+fi

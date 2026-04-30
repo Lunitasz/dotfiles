@@ -1,0 +1,73 @@
+(defwidget control_center_widget []
+  (box :class "cc-window" :orientation "v" :space-evenly false :spacing 13
+    
+    ;; --- CABECERA: BIENVENIDA Y TIEMPO ENCENDIDA ---
+    (box :class "cc-card" :orientation "h" :space-evenly false :spacing 15
+      (box :class "user-pfp" :style "background-image: url('${EWW_CONFIG_DIR}/scripts/icon.jpg');")
+      (box :orientation "v" :halign "start" :valign "center" :hexpand true
+        (label :text "Bienvenida, Luna" :class "welcome-text" :halign "start")
+        (label :text "up ${sys_uptime}" :class "uptime-text" :halign "start")))
+
+    ;; --- ACCIONES RÁPIDAS (Botones con Mute Rojo) ---
+    (box :class "cc-actions-container" :spacing 10 :homogeneous true
+      
+      ;; Audio Mute (Se pone rojo si el icono es el de silencio)
+      (button :class "action-btn ${vol_icon == '󰝟' ? 'red' : 'audio'}" 
+              :onclick "scripts/set-volume.sh --toggle"
+        (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
+          (label :text vol_icon :class "action-icon")
+          (label :text "audio" :class "action-label")))
+
+      ;; Mic Mute (Se pone rojo si el icono es el de silencio)
+      (button :class "action-btn ${mic_icon == '󰍭' ? 'red' : 'mic'}" 
+              :onclick "scripts/mic_logic.sh --toggle"
+        (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
+          (label :text mic_icon :class "action-icon")
+          (label :text "mic" :class "action-label")))
+
+      (button :class "action-btn capture" :onclick "scripts/screenshot.sh"
+        (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
+          (label :text "󰄄" :class "action-icon")
+          (label :text "capture" :class "action-label")))
+
+      (button :class "action-btn clip" :onclick "scripts/clipboard.sh --rofi"
+        (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
+          (label :text "󰅍" :class "action-icon")
+          (label :text "clip" :class "action-label"))))
+
+    ;; --- BARRA DE VOLUMEN ---
+    (box :class "cc-card" :space-evenly false :spacing 15
+      (label :text "󰕾" :class "vol-slider-icon")
+      (scale :class "vol-bar" :hexpand true :min 0 :max 101 :value volume_percent :onchange "scripts/set-volume.sh --set {}")
+      (label :text "${volume_percent}%" :class "vol-slider-text"))
+
+    ;; --- CUADRO DE ACTUALIZACIONES ---
+    (box :class "cc-card updates-card" :orientation "v" :space-evenly false :spacing 12
+      (box :space-evenly false :spacing 15 :valign "center"
+        (box :class "update-icon-box" (label :text "󰚰"))
+        (box :orientation "v" :halign "start" :hexpand true
+          (label :text "Actualizaciones" :class "card-title" :halign "start")
+          (label :text "${up_count} paquetes disponibles" :class "card-subtitle" :halign "start")))
+      (label :text up_list :class "update-item-list" :halign "start" :wrap true))
+
+    ;; --- ESTADÍSTICAS DEL SISTEMA (3 Círculos con Porcentaje) ---
+    (box :class "stats-grid-container" :spacing 10 :homogeneous true
+      (stat_box :value cpu_usage :label "cpu" :color "#f38ba8")
+      (stat_box :value ram_usage :label "ram" :color "#cba6f7")
+      (stat_box :value root_disk :label "disco" :color "#f9e2af"))
+  )
+)
+
+;; --- WIDGET PARA LOS CÍRCULOS (Limpio, sin iconos internos) ---
+(defwidget stat_box [value label color]
+  (box :class "stat-card" :orientation "v" :space-evenly false :spacing 5 :valign "center"
+    ;; El círculo ahora va solo, sin nada adentro para que no tire error
+    (circular-progress :value value 
+                       :thickness 11
+                       :start-at 75 
+                       :style "color: ${color};"
+                       :class "stat-circle")
+    
+     (box :orientation "v" :space-evenly false :spacing 3
+      (label :text "${round(value, 0)}%" :class "stat-percentage")
+      (label :text label :class "stat-label"))))

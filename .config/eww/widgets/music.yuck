@@ -1,0 +1,3 @@
+(defwidget music []
+  (box :class "music-window"
+    (label :text "Widget Música")))

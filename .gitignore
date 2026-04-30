@@ -1,0 +1,10 @@
+*.log
+*.cache
+.cache/
+__pycache__/
+.ssh/
+.gnupg/
+*.key
+*.pem
+*.token
+.env

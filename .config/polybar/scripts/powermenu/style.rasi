@@ -1,0 +1,123 @@
+configuration {
+    modi: "drun,run,filebrowser,window";
+    show-icons: false;
+    font: "MesloLGS NF 12";
+}
+
+* {
+    bg:            #0f111acc;
+    bg-alt:        #1a1d2bcc;
+    fg:            #e5e7eb;
+    muted:         #7f849c;
+    blue:          #89b4fa;
+    purple:        #cba6f7;
+    red:           #f38ba8;
+    green:         #a6e3a1;
+    yellow:        #f9e2af;
+
+    border-col:    #2b2f42;
+    selected-bg:   #2a2d40;
+    active-bg:     #3b4261;
+    urgent-bg:     #4a2030;
+
+    border-r:      24px;
+    elem-r:        20px;
+}
+
+window {
+    transparency: "real";
+    location: northeast;
+    anchor: northeast;
+    fullscreen: false;
+    width: 380px;
+    x-offset: -10px;
+    y-offset: 50px;
+    background-color: #0f111acc;
+    border: 2px;
+    border-color: #2b2f42;
+    border-radius: 24px;
+    padding: 22px;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 16px;
+    children: [ "message", "listview" ];
+}
+
+inputbar {
+    background-color: transparent;
+    children: [ "textbox-prompt-colon", "entry" ];
+    spacing: 10px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: "power";
+    text-color: @purple;
+    background-color: @bg-alt;
+    border-radius: 12px;
+    padding: 10px 14px;
+}
+
+entry {
+    placeholder: "Choose action...";
+    placeholder-color: @muted;
+    text-color: @fg;
+    background-color: @bg-alt;
+    border-radius: 12px;
+    padding: 10px 14px;
+}
+
+message {
+    enabled: false;
+}
+
+listview {
+    columns: 2;
+    lines: 2;
+    spacing: 14px;
+    cycle: false;
+    dynamic: true;
+    layout: vertical;
+    background-color: transparent;
+}
+
+element {
+    background-color: @bg-alt;
+    text-color: @fg;
+    orientation: vertical;
+    border-radius: @elem-r;
+    padding: 18px;
+    children: [ "element-icon", "element-text" ];
+}
+
+element normal.normal {
+    background-color: @bg-alt;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @active-bg;
+    text-color: @fg;
+}
+
+element selected.urgent {
+    background-color: @urgent-bg;
+    text-color: @red;
+}
+
+element-icon {
+    size: 36px;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    margin: 0 0 10px 0;
+    background-color: transparent;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    text-color: inherit;
+    background-color: transparent;
+}

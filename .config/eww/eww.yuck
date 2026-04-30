@@ -1,0 +1,38 @@
+(include "./widgets/calendar.yuck")
+(include "./widgets/control_center.yuck")
+
+;; Polls globales que usa el calendario
+(defpoll hours :interval "1s" "date '+%H'")
+(defpoll minutes :interval "1s" "date '+%M'")
+(defpoll full_date :interval "1h" "date '+%A, %d %B'")
+
+;; control center
+(defpoll volume_percent :interval "1s" "scripts/set-volume.sh --get")
+(defpoll vol_icon       :interval "1s" "scripts/set-volume.sh --icon")
+(defpoll mic_icon       :interval "1s" "scripts/mic_logic.sh --icon")
+(defpoll dnd_status     :interval "1s" "scripts/notifications.sh --get-dnd")
+
+(defpoll up_count       :interval "30m" "scripts/updates.sh --count")
+(defpoll up_list        :interval "30m" "scripts/updates.sh --list")
+
+(defpoll cpu_usage  :interval "2s" "scripts/system-stats.sh --cpu")
+(defpoll ram_usage  :interval "2s" "scripts/system-stats.sh --ram")
+(defpoll root_disk  :interval "10m" "scripts/system-stats.sh --disk-root")
+(defpoll sys_uptime :interval "1m" "scripts/system-stats.sh --uptime")
+
+
+
+(defwindow calendar_window
+  :monitor 0
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore true
+  :geometry (geometry :x "-15px" :y "55px" :anchor "top right")
+  (cal))
+
+(defwindow control_center
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry :x "-15px" :y "55px" :anchor "top right")
+  (control_center_widget))
+

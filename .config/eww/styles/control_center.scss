@@ -1,0 +1,128 @@
+
+$bg: #1e1e2e;
+$card-bg: #181825;
+$card-bg-alt: #313244;
+$fg: #cdd6f4;
+$subtext: #a6adc8;
+$lavender: #b4befe;
+$blue: #89b4fa;
+$red: #f38ba8;
+$mauve: #cba6f7;
+$green: #a6e3a1;
+
+
+.cc-window {
+  background-color: $bg;
+  color: $fg;
+  padding: 20px;
+  border-radius: 24px;
+  min-width: 380px;
+  font-family: "JetBrainsMono Nerd Font", "sans-serif";
+}
+
+
+.cc-card {
+  background-color: $card-bg;
+  padding: 15px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+}
+
+.user-pfp {
+  min-width: 60px;
+  min-height: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+  border: 0.5px solid $lavender;
+}
+
+.welcome-text { font-size: 1.2rem; font-weight: bold; }
+.uptime-text { font-size: 0.8rem; color: $subtext; }
+
+
+.action-btn {
+  background-color: $card-bg;
+  border-radius: 16px;
+  min-height: 90px;
+  padding: 10px;
+  transition: all 200ms ease;
+
+  .action-icon { font-size: 1.5rem; margin-bottom: 5px; }
+  .action-label { font-size: 0.75rem; font-weight: bold; }
+
+ 
+  &.audio { color: $red; }
+  &.mic { color: $mauve; }
+  &.capture { color: $blue; }
+  &.clip { color: $green; }
+
+  &.red {
+    background-color: $red;
+    .action-icon, .action-label { color: $bg; } 
+  }
+
+  &:hover { background-color: $card-bg-alt; }
+}
+
+
+scale.vol-bar {
+  trough {
+    background-color: $card-bg-alt;
+    border-radius: 10px;
+    min-height: 10px;
+  }
+  highlight {
+    background-color: $lavender;
+    border-radius: 10px;
+  }
+  slider {
+    background-color: #f5e0dc;
+    border-radius: 100%;
+    min-height: 20px;
+    min-width: 20px;
+  }
+}
+
+.vol-slider-icon { font-size: 1.2rem; color: $lavender; }
+.vol-slider-text { font-size: 1rem; font-weight: bold; }
+
+
+.update-icon-box {
+  background-color: $card-bg-alt;
+  color: $green;
+  font-size: 1.5rem;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.card-title { font-size: 1.1rem; font-weight: bold; }
+.card-subtitle { font-size: 0.8rem; color: $subtext; }
+.update-item-list { font-size: 0.75rem; color: $green; font-family: monospace; }
+
+
+.stat-card {
+  background-color: $card-bg;
+  padding: 20px 5px;
+  border-radius: 15px;
+  min-height: 80px;
+}
+
+circular-progress {
+  background-color: $card-bg-alt;
+  min-height: 120px;
+  min-width: 120px;
+}
+
+.stat-value {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: white;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: $subtext;
+  font-weight: bold;
+  margin-top: 8px;
+}

@@ -1,0 +1,14 @@
+(defwidget cal []
+  (box :class "calendar-main" :orientation "v" :space-evenly false
+    (box :class "header" :space-evenly false :halign "start"
+      (label :text hours :class "time")
+      (box :class "sep")
+      (label :text minutes :class "mins"))
+    (label :text full_date :class "date" :halign "start")
+
+    (box :padding "0 20px"
+    (calendar :class "render" 
+                :show-heading true 
+                :show-day-names true))))
+
+

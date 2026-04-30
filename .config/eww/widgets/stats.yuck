@@ -1,0 +1,3 @@
+(defwidget stats []
+  (box :class "stats-window"
+    (label :text "Widget Stats")))
