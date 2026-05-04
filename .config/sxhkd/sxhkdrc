@@ -117,7 +117,7 @@ super + ctrl + shift + space
 
  #custom script resize windows - cambiar de tamaño la ventana               
 super + alt + {Left,Down,Up,Right}
-	/home/luna/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
+	$HOME/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
 
 
 # move a floating window
