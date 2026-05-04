@@ -48,10 +48,21 @@ mkdir -p "$BACKUP_DIR"
 [ -f "$HOME/.zshrc" ] && cp "$HOME/.zshrc" "$BACKUP_DIR/"
 [ -f "$HOME/.p10k.zsh" ] && cp "$HOME/.p10k.zsh" "$BACKUP_DIR/"
 
-# Copiar configs
-echo "⚙️ Copiando configs..."
+# Linkear configs
+echo "🔗 Linkeando configs..."
 mkdir -p "$HOME/.config"
-cp -r "$DOTFILES_DIR/.config/"* "$HOME/.config/"
+
+for dir in "$DOTFILES_DIR/.config/"*; do
+    name="$(basename "$dir")"
+    dest="$HOME/.config/$name"
+
+    if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+        echo "Moviendo $dest al backup..."
+        mv "$dest" "$BACKUP_DIR/$name"
+    fi
+
+    ln -sfn "$dir" "$dest"
+done
 
 # Copiar zsh
 echo "💻 Copiando configuración de ZSH..."
