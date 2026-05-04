@@ -18,16 +18,17 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off 
 
 picom &
-vmware-user &
+command -v vmware-user >/dev/null 2>&1 && vmware-user &
+command -v clipmenud >/dev/null 2>&1 && clipmenud &
+xrandr | grep -q "Virtual-1 connected" && xrandr --output Virtual-1 --mode 1920x1080 &
 ~/.config/polybar/launch.sh &
 
 # Iniciar el recolector de cliphist (necesita wl-paste en Wayland o un agente de X11)
 # Si estás en X11 (lo más probable en bspwm):
-clipmenud & 
 # O directamente el comando de cliphist si usas un script de captura:
 # (Esto depende de qué herramienta uses para capturar el copy)
 #
 feh --bg-scale /usr/share/wallpapers/desktop_geminis.png
 
 # Set resolution
-xrandr --output Virtual-1 --mode 1920x1080 &
+
