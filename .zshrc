@@ -40,18 +40,27 @@ bindkey '^[[1;5D' backward-word
 # borrar palabra
 bindkey '^H' backward-kill-word
 
-# =====================================================
+# ==============================
 # AUTOSUGGESTIONS
-# =====================================================
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# ==============================
+
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#6c6f93"
 
-# =====================================================
+# ==============================
 # SYNTAX HIGHLIGHTING
-# (SIEMPRE AL FINAL DE PLUGINS)
-# =====================================================
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# ==============================
 
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 ZSH_HIGHLIGHT_STYLES[command]='fg=2'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=160'
