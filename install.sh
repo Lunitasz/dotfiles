@@ -64,7 +64,10 @@ if [ "$DISTRO" = "arch" ]; then
         playerctl networkmanager xorg-xrandr xorg-xinit \
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio pulseaudio-alsa \
-        unzip wget
+        pacman-contrib \
+        unzip wget 
+fi
+
 
 elif [ "$DISTRO" = "parrot" ]; then
     sudo apt update
