@@ -1,5 +1,6 @@
 (include "./widgets/calendar.yuck")
 (include "./widgets/control_center.yuck")
+(include "widgets/now-playing.yuck")
 
 ;; Polls globales que usa el calendario
 (defpoll hours :interval "1s" "date '+%H'")
@@ -20,6 +21,9 @@
 (defpoll root_disk  :interval "10m" "scripts/system-stats.sh --disk-root")
 (defpoll sys_uptime :interval "1m" "scripts/system-stats.sh --uptime")
 
+(defpoll music_progress :interval "1s" "scripts/now-playing.sh progress")
+(defpoll music_current :interval "1s" "scripts/now-playing.sh current")
+(defpoll music_duration :interval "5s" "scripts/now-playing.sh duration")
 
 
 (defwindow calendar_window

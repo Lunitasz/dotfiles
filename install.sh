@@ -65,20 +65,21 @@ if [ "$DISTRO" = "arch" ]; then
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio pulseaudio-alsa \
         pacman-contrib \
-        unzip wget 
-fi
-
+        unzip wget
 
 elif [ "$DISTRO" = "parrot" ]; then
     sudo apt update
+
     sudo apt install -y \
         bspwm sxhkd polybar rofi kitty picom dunst feh git zsh \
         playerctl network-manager x11-xserver-utils \
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio-utils \
         fonts-font-awesome unzip wget
+
     install_eww_debian
 fi
+
 
 # Backup
 echo "📦 Creando backup en: $BACKUP_DIR"
@@ -115,6 +116,17 @@ if [ ! -d "$HOME/powerlevel10k" ]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k"
 fi
 
+# Root ZSH
+echo "👑 Configurando root..."
+
+sudo cp "$HOME/.zshrc" /root/.zshrc 2>/dev/null || true
+sudo cp "$HOME/.p10k.zsh" /root/.p10k.zsh 2>/dev/null || true
+
+if [ ! -d "/root/powerlevel10k" ]; then
+    sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/powerlevel10k
+fi
+
+sudo chsh -s /bin/zsh root 2>/dev/null || true
 
 # Fonts
 echo "🔤 Instalando fuentes..."

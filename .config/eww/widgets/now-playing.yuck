@@ -1,0 +1,34 @@
+(defpoll music_title :interval "1s" "scripts/now-playing.sh title")
+(defpoll music_artist :interval "1s" "scripts/now-playing.sh artist")
+(defpoll music_icon :interval "1s" "scripts/now-playing.sh icon")
+
+(defwidget now_playing []
+  (box :class "now-playing-card" :orientation "v" :space-evenly false
+
+    (box :class "music-info" :orientation "h" :space-evenly false
+      (button :class "music-art" :onclick "scripts/now-playing.sh open" "♪")
+
+      (box :class "music-text" :orientation "v" :space-evenly false
+        (label :class "music-title" :text music_title :limit-width 34)
+        (label :class "music-artist" :text music_artist :limit-width 34)))
+
+    (scale :class "music-progress"
+      :min 0
+      :max 100
+      :value music_progress
+      :draw-value false)
+
+    (box :class "music-time" :orientation "h"
+        (label :text music_current)
+        (label :text music_duration))
+
+    (box :class "music-controls" :orientation "h" :halign "center" :spacing 24
+      (button :class "music-control-btn" :onclick "scripts/now-playing.sh previous" "")
+      (button :class "music-control-btn play" :onclick "scripts/now-playing.sh play-pause" music_icon)
+      (button :class "music-control-btn" :onclick "scripts/now-playing.sh next" ""))))
+
+(defwindow now_playing_window
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry :x "-350px" :y "55px" :anchor "top right")
+  (now_playing))
