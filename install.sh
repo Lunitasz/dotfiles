@@ -54,6 +54,28 @@ install_eww_debian() {
     echo "✅ eww instalado."
 }
 
+# INSTALL EWW ARCH
+
+install_eww_arch() {
+    if command -v eww >/dev/null 2>&1; then
+        echo "✅ eww ya instalado"
+        return
+    fi
+
+    if ! command -v yay >/dev/null 2>&1; then
+        echo "📦 Instalando yay..."
+
+        sudo pacman -S --needed --noconfirm git base-devel
+
+        git clone https://aur.archlinux.org/yay.git /tmp/yay
+        cd /tmp/yay
+        makepkg -si --noconfirm
+    fi
+
+    echo "📦 Instalando eww..."
+    yay -S --noconfirm eww
+}
+
 
 # Instalar paquetes
 echo "📦 Instalando paquetes..."
@@ -66,6 +88,12 @@ if [ "$DISTRO" = "arch" ]; then
         pavucontrol pulseaudio pulseaudio-alsa \
         pacman-contrib \
         unzip wget
+        eza bat neovim firefox \
+        zsh-autosuggestions zsh-syntax-highlighting \
+        procps-ng coreutils cliphist clipmenu
+
+    install_eww_arch
+
 
 elif [ "$DISTRO" = "parrot" ]; then
     sudo apt update
@@ -76,6 +104,9 @@ elif [ "$DISTRO" = "parrot" ]; then
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio-utils \
         fonts-font-awesome unzip wget
+        eza bat neovim firefox \
+        zsh-autosuggestions zsh-syntax-highlighting \
+        procps coreutils
 
     install_eww_debian
 fi
