@@ -62,6 +62,8 @@ elif [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+typeset -gA ZSH_HIGHLIGHT_STYLES
+
 ZSH_HIGHLIGHT_STYLES[command]='fg=2'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=160'
 
