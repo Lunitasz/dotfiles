@@ -68,7 +68,7 @@ install_eww_arch() {
         sudo pacman -S --needed --noconfirm git base-devel
 
         git clone https://aur.archlinux.org/yay.git /tmp/yay
-        cd /tmp/yay
+        cd /tmp/yay || exit
         makepkg -si --noconfirm
     fi
 
@@ -87,7 +87,7 @@ if [ "$DISTRO" = "arch" ]; then
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio pulseaudio-alsa \
         pacman-contrib \
-        unzip wget
+        unzip wget \
         eza bat neovim firefox \
         zsh-autosuggestions zsh-syntax-highlighting \
         procps-ng coreutils cliphist clipmenu
@@ -103,7 +103,7 @@ elif [ "$DISTRO" = "parrot" ]; then
         playerctl network-manager x11-xserver-utils \
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio-utils \
-        fonts-font-awesome unzip wget
+        fonts-font-awesome unzip wget \
         eza bat neovim firefox \
         zsh-autosuggestions zsh-syntax-highlighting \
         procps coreutils
