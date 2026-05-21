@@ -18,3 +18,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 sudo apt install bat
 sudo ln -s /usr/bin/batcat /usr/local/bin/bat 
+
+echo 'export PATH=$PATH:/usr/sbin' >> ~/.zshrc
+source ~/.zshrc
