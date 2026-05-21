@@ -119,7 +119,7 @@ precmd() {
 # =====================================================
 # PATH EXTRA (opcional)
 # =====================================================
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 
 
 
