@@ -18,6 +18,16 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_find_no_dups
 
+
+# Limpiar historial manualmente
+clearhist() {
+    history -c
+    rm -f ~/.zsh_history
+    fc -p
+    echo "🧹 Historial borrado"
+} 
+
+
 # =====================================================
 # COMPLETION
 # =====================================================
