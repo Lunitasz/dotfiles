@@ -211,7 +211,7 @@ elif [ "$DISTRO" = "parrot" ]; then
         curl jq xclip xsel flameshot maim scrot \
         pavucontrol pulseaudio-utils \
         fonts-font-awesome unzip wget \
-        eza bat neovim firefox \
+        eza bat neovim \
         zsh-autosuggestions zsh-syntax-highlighting \
         procps coreutils build-essential
 
