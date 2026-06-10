@@ -20,15 +20,27 @@ bspc rule -a Screenkey manage=off
 pgrep -x picom > /dev/null || picom --config "$HOME/.config/picom/picom.conf" &
 command -v vmware-user >/dev/null 2>&1 && vmware-user &
 command -v clipmenud >/dev/null 2>&1 && clipmenud &
-xrandr | grep -q "Virtual-1 connected" && xrandr --output Virtual-1 --mode 1920x1080 &
+
+# VMware / resolución automática
+command -v vmware-user >/dev/null 2>&1 && pgrep -x vmware-user >/dev/null || vmware-user &
+
+xrandr --auto &
+
+# Wallpaper
+feh --bg-fill /usr/share/wallpapers/desktop_geminis.png &
+
+# Polybar
 ~/.config/polybar/launch.sh &
 
-# Iniciar el recolector de cliphist (necesita wl-paste en Wayland o un agente de X11)
-# Si estás en X11 (lo más probable en bspwm):
-# O directamente el comando de cliphist si usas un script de captura:
-# (Esto depende de qué herramienta uses para capturar el copy)
-#
-feh --bg-scale /usr/share/wallpapers/desktop_geminis.png
+# Vigilar cambios de resolución y reajustar wallpaper/polybar
+while true; do
+    CURRENT_RES="$(xrandr | grep '*' | head -n1)"
 
-# Set resolution
+    if [ "$CURRENT_RES" != "$LAST_RES" ]; then
+        LAST_RES="$CURRENT_RES"
+        feh --bg-fill /usr/share/wallpapers/desktop_geminis.png &
+        ~/.config/polybar/launch.sh &
+    fi
 
+    sleep 2
+done &
